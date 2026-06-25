@@ -18,5 +18,9 @@ Why is F^n a special case of F^S? <br>
 What advantages does the function viewpoint provide? <br>
 Why does pointwise addition satisfy the vector space axioms? <br>
 
+Subspaces <br>
+Is R^R R-dimensional? just like how R^2 is 2-dimensional? If not, why? 
+
+
 Random/advanced <br>
 Why are isomorphisms important? <br>
