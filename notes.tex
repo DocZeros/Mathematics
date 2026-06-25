@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb} % more symbols
+\usepackage{amsmath} %Required for implies and other symbols
+
+\title{Notes on Linear Algebra Done Right! by S. Axler}
+\author{Neilan Ghosh}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+\section{Chapter 1 - Vector Spaces}
+\subsection{Some basic properties (* is an arbitrary operation)} \\
+1. Commutativity - $\alpha * \beta = \beta * \alpha$ \\
+2. Associativity - $(\alpha*\beta)*\gamma = \alpha*(\beta*\gamma)$ \\
+3. Identities - $\alpha * k = \alpha$, where k is a constant \\
+4. Inverse - $\forall \alpha \in \mathbb{C}, \exists \beta \in \mathbb{C}$ such that $\alpha + \beta = 0$ \\
+5. Distributive - $\lambda(\alpha*\beta) = \lambda\alpha * \lambda\beta$ \\
+\subsection{Lists}
+The set $\mathbb{R}^{2}$, which is a standard plane can be set up as \\
+\begin{equation}
+    \mathbb{R}^2 = \{(x,y): x,y \in \mathbb{R}\}
+\end{equation}
+
+Similarly, the set $\mathbb{R}^3$, which is ordinary 3D-space can be set up as
+\begin{equation}
+    \mathbb{R}^3 = \{(x,y,z): x,y,z \in \mathbb{R}\}
+\end{equation}
+
+A list is an ordered collection of n elements \\ 
+The "coordinates" in n-dimensional space is called a list. You can think of it as "arguments for movement". \\
+\begin{center}
+    List of n-length tuple $\rightarrow (z_1, z_2, z_3,...z_n)$ = z 
+\end{center}
+\begin{itemize}
+    \item Sometimes, lists are contracted to a single letter as shown above 
+    \item A list of length 0 is (). This does not lead to trivial exceptions in some theorems. 
+\end{itemize}
+
+List v Sets
+\begin{itemize}
+    \item (3,5) $\neq$ (5,3), but \{3,5\} = \{5,3\}
+    \item (1,1) $\neq$ (1,1,1), but \{1,1\} = \{1,1,1\} = \{1\}
+\end{itemize}
+
+\subsection{$\mathbb{F}^n$}
+Use $\mathbb{F}$ whenever $\mathbb{R}$ or $\mathbb{C}$ ($\mathbb{F}$ implies whichever space is more appropriate). $\mathbb{F}^n$ is the set of all n-tuple lists with elements belonging to $\mathbb{F}$ 
+\begin{center}
+    $\mathbb{F}^n$ = \{($x_1,x_2,x_3,...x_n$): $x_k$ $\in \mathbb{F}$ for k = 1,2,3,...n\}
+\end{center}
+
+We say that $x_k$ is the kth coordinate of the list for ($x_1,x_2,...x_n$) $\in$ $\mathbb{F}$ and k $\in \{1,2,3...n\}$ \\ 
+Even if our visualization and geometric approach stops at $\mathbb{R}^4$ and $\mathbb{C}^2$, we can still use algebraic manipulations. \\ 
+For x $\in \mathbb{F}^n$, the additive inverse of x is the vector -x $\in \mathbb{F}^n$ such that 
+\begin{center}
+    x + (-x) = 0
+    $\therefore$ If x = $(x_1, x_2,..x_n)$ $\implies$ $-x = (-x_1,-x_2,...-x_n)$
+\end{center}
+Product of a number $\lambda$ and a vector in $\mathbb{F}^n$ is done by multiplying individually. 
+\subsection{What is a field?}
+\textbf{Definition} \\ 
+\begin{center}
+    "A set containing at least two distinct elements, 0 and 1, along with operations of addition and multiplication following the laws"
+\end{center}
+\textbf{Intuition:}
+Think of it as a counter-top. Your ingredients (elements) can be combined (in ways called operations) to give new ingredients which can be used further. The counter-top with ingredients and combining methods is the field. \\
+Logically, you cannot get something out of the set you are operating out of. \\
+A reason why $\mathbb{Z}$ is not a field is because most elements of it do not have a multiplicative inverse which belongs to $\mathbb{Z}$ itself. \\
+Also, remember that there is an "undo" button for all ingredients except 0 (which are the additive and multiplicative inverses) \\
+
+\subsection{Vector Spaces}
+\textbf{Incentive}: Properties of addition and multiplication ($\because$ Commutativity, associativity, existence of identity and inverse, distributivity) 
+\begin{center}
+    A set V with operations of addition and scalar multiplication, which follow the rules of associativity, commutativity etc.
+\end{center}
+\textbf{What this means} is that I can add two elements and multiply them with an element of $\mathbb{F}$ (Scalar, can be $\mathbb{R}$ or $\mathbb{C}$) \\ 
+Mathematically, I would say \\
+\begin{itemize}
+    \item Addition is a function that gives an element t (can be unique or equal) $\in$ V such that t = u + v where u,v $\in$ V
+    \item Scalar multiplication is a function that gives an element to $\lambda$v $\in$ V s.t. v $\in$ V and $\lambda\in \mathbb{F}$ 
+\end{itemize}
+\textbf{Definition:} 
+\begin{center}
+    A vector space V is a set along with an addition on V and a scalar multiplication s.t. the following hold \\
+    \textbf{Commutativity} - $u+v = v+u, \forall u,v \in V$ \\
+    \textbf{Associativity} - $(u+v)+w = u + (v+w)$ and $(ab)v = a(bv) \forall u,v,w \in V$ and $\forall a,b \in \mathbb{F}$ \\
+\end{center}
+Along with this, it must have additive identities, additive inverses, multiplicative identities and the distributive property
+
+\subsection{Isn't this just a field?}
+\textbf{NO.} A few reasons for this are 
+\begin{itemize}
+    \item In a field, the elements can be added and multiplied i.e. $ab \in \mathbb{F} \forall a,b\in \mathbb{F}$. But in a vector space, two vectors CANNOT be multiplied together i.e. vw is not defined $\forall v,w \in V$
+    \item You might think "Why not define multiplication as cross product? Now, we can multiply vectors and get a vector out of it." \\
+    NO. This does not work since cross products are defined in 3D or 7D but not in other dimensions. On top of that, the associativity is violated in the vector space V.
+\end{itemize}
+Also, whenever we say "V is a vector space over $\mathbb{F}$", it implies that for scalar multiplication, we take elements from the field $\mathbb{F}$
+\subsection{An interesting example of a vector space}
+A set of functions $\rightarrow \mathbb{F}^S$ \\
+If S is a set, then $\mathbb{F^S}$ is the set of functions $S \rightarrow \mathbb{F}$ \\
+ADDITION $\rightarrow \forall f,g\in \mathbb{F}^S$, then f+g is defined as 
+\begin{center}
+    (f+g)(x) = f(x) + g(x) $\forall x \in S$
+\end{center}
+SCALAR MULTIPLICATION $\rightarrow \forall f\in \mathbb{F}^S$ and $\lambda f \in \mathbb{F}^S$ is defined as 
+\begin{center}
+    $(\lambda f)(x)$ = $\lambda f(x) \forall x\in S$
+\end{center}
+\subsection{Excerpt from Axler}
+\begin{center}
+    "The vector space $\mathbb{F}^n$ is a special case of the vector space $\mathbb{F}^S$ because each $(x_1, ..., x_n) \in \mathbb{F}^n$ can be thought of as a function x from the set \{1,2,...,n\} to F by writing x(k) instead of $x_k$ for the kth coordinate of $(x_1, ..., x_n)$."
+\end{center}
+He is trying to tell you to move on from "arrows" to functions. \\
+$\mathbb{F}^n$ is a set of functions from \{1,2,3,...n\} to $\mathbb{F}$ \\
+Say x:\{1,2,3,...n\} $\rightarrow \mathbb{F}$ \\
+x(1) = $x_1$, x(2) = $x_2$,... \\ 
+This swaps the coordinate logic with functions. \\
+\textbf{Incentive:} Used when there is no definite coordinate system in place.
+
+\end{document}
