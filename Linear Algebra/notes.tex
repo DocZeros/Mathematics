@@ -2,6 +2,9 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amssymb} % more symbols
 \usepackage{amsmath} %Required for implies and other symbols
+\usepackage{amsthm} %Required for environments
+\usepackage{tikz} %Diagrams
+\usepackage{tikz-3dplot} %3D diagrams
 
 \title{Notes on Linear Algebra Done Right! by S. Axler}
 \author{Neilan Ghosh}
@@ -115,6 +118,277 @@ $\mathbb{F}^n$ is a set of functions from \{1,2,3,...n\} to $\mathbb{F}$ \\
 Say x:\{1,2,3,...n\} $\rightarrow \mathbb{F}$ \\
 x(1) = $x_1$, x(2) = $x_2$,... \\ 
 This swaps the coordinate logic with functions. \\
-\textbf{Incentive:} Used when there is no definite coordinate system in place.
+\textbf{Incentive:} Used when there is no definite coordinate system in place. \\ 
+\\
+When we defined the vector space V, we set two operations in the space itself: Addition and scalar multiplication \\
+
+\textbf{Claim:} Prove that a vector space has a unique additive identity \\
+\textbf{Proof:} Assume that 0 and 0' are additive identities for some vector space V. \\
+Then, 
+\begin{center}
+    0' = 0+0' = 0'+0 = 0
+\end{center}
+The first equality holds since 0 is an additive identity. \\
+The second equality holds due to commutativity. \\
+The third equality holds since 0' is an additive identity.\\
+$\therefore$ There exists only one additive identity for a vector space. \\
+\\
+\textbf{Claim:} P.T. every element in a vector space has a unique additive inverse. \\
+\textbf{Proof:} Assume that w and w' $\in V$ are the additive inverses of an element v $\in V$ \\
+$\implies$ w = w+0 = w+(v+w') = (w+v)+w' = 0+w' = w' \\ 
+$\therefore$ w = w' \\
+$\therefore$ There exists a unique additive inverse for every element in a vector space \\
+\textit{Why not just say v+w = v+w'? Subtracting on both sides, we get w = w'} \\
+Subtraction has not yet been defined. Same with inverses (don't add by inverses). \\ 
+\textbf{Consequence of proving additive inverse unique:} We can now say for v,w $\in V$ 
+\begin{center}
+    -v denotes additive inverse of v \\
+    w-v is defined to be w+(-v)
+\end{center}
+\textbf{Claim:} P.T. 0*v = 0 $\forall v \in V$ \\
+\textbf{Proof:} For $\forall v \in V$, we have \\
+\begin{center}
+    0v = (0+0)v = 0v+0v
+\end{center}
+Adding the additive inverse of 0v on both sides, we get \\
+\begin{center}
+    $\implies$ 0 = 0v \\
+    Proved.
+\end{center}
+\textbf{Claim:} P.T. (-1)v = -v $\forall v \in V$ \\
+\textbf{Proof:} For $v \in V$, we know that 
+\begin{center}
+    (-1)v + v = (-1)v + 1v = ((-1) + 1)v = 0v = 0 \\
+    $\implies$ (-1)v + v = 0 \\ 
+    Adding additive inverse of v on both sides, \\ 
+    $\implies$ (-1)v = -v \\
+    Proved.
+\end{center}
+\subsection{Subspaces}
+\textbf{Definition:}
+\begin{center}
+    A subset U of V is called a subspace of V if U is also a vector space with the same additive identity, addition and scalar multiplication as on V.
+\end{center}
+\textbf{Intuition:} \\
+Remember the counter-top? Now, you segment it; some of it is meant for cutting, some for spices etc. You can still do the same things (combine as in operations) but now in a specific region which belongs to the larger counter-top (the vector space $V$) \\
+\textbf{Conditions:} \\
+A subset U of V is a subspace $\iff$ U satisfies the following 
+\begin{itemize}
+    \item Additive Identity \\
+    0 $\in U$            ...(1)
+    \item Closed under addition \\
+    u,w $\in U \rightarrow$ u + w $\in U$             ...(2)
+    \item Closed under multiplication \\ 
+    u $\in U$, a $\in \mathbb{F} \rightarrow$ au $\in U$        ....(3)
+\end{itemize}
+(1) signifies the additive identity is present in $U$ \\
+(2) signifies that addition makes sense \\
+(3) signifies that multiplication makes sense \\ 
+Notice that, since we proved associativity, commutativity etc. for vector space V, any subspace U of V would automatically have it. Whatever you proved recently applies to the subspace U. \\
+Ex: $\forall$ u  $\in U \rightarrow$ (-1)u = -u $\in U$ \\
+\subsection{Examples of Subspaces}
+\textbf{1.} If b $\in \mathbb{F}$, then 
+\begin{center}
+    $\{(x_1, x_2,x_3,x_4) \in \mathbb{F}^4 : x_3 = 5x_4 + b\}$ \\
+    is a subspace of $\mathbb{F}^4 \iff$ b = 0
+\end{center}
+\textbf{Note:} Algebraically, I would say \\
+\textbf{Case 1:} b = 0 $\implies x_3 = 5x_4$ \\
+(0,0,0,0) does belong to this subspace as 0 = 5(0) \\
+\textbf{Case 2:} b $\neq$ 0 (say b = 1) $\implies x_3 = 5x_4 +1$  \\
+$\therefore$ (0,0,0,0) does not belong to this subset, disqualifying it as a subspace. \\ 
+\textit{Geometrically, the origin being there is imperative to make a subset a subspace.} \\
+\\
+\textbf{2.} Set of continuous real valued functions on the interval [0,1] is a subspace of $\mathbb{R}^{[0,1]}$ \\
+\\
+\textbf{3.} Set of differentiable real-valued functions on $\mathbb{R}$ is a subspace of $\mathbb{R}^{\mathbb{R}}$
+\subsection{Geometric Interpretation of subspaces}
+The subspaces of $\mathbb{R}^2$ are any lines which pass through (0,0), $\{0\}$ itself, and $\mathbb{R}^2$ \\
+Note that other shapes such as parabolae, hyperbolas etc. DO NOT come under subspace classification. \\
+
+\textbf{Question:} Is S = $\{(x,y): x \ge 0, x,y \in \mathbb{R}\}$ a subspace of $\mathbb{R}^2$? \\
+NO. Go through it. Origin (0,0) is there. Addition makes sense (is closed) here, but scalar multiplication falls apart. (Multiply by -1 and see) 
+\subsection{Sums of Subspaces}
+Generally, we are interested in subspaces of a vector space. 
+\textbf{Definition:} 
+\begin{center}
+    Suppose $V_1,..., V_m$ are subspaces of V. The sums of $V_1,...V_m$ denoted by $V_1+...+ V_m$ is the set of all possible sums of elements of $V_1,..., V_m$. More precisely, \\
+    $V_1+...+ V_m$ = $\{v_1+...+ v_m:v_1 \in V_1,...v_m \in V_m \}$
+\end{center}
+\textbf{Note:} You would think of sum of subspaces to be the union of the subsets. Do not do this mistake. It holds a different logic. \\
+Union is "Either A or B" \\
+Sum of subspaces is "Move in A then B" \\
+\\
+Example: \\
+1. Sum of subspaces of $\mathbb{F}^3$ \\
+\begin{center}
+    U = $\{(x,0,0) \in \mathbb{F}^3 : x \in \mathbb{F}\}$ \\
+    and V = $\{(0,y,0) \in \mathbb{F}^3 : y \in \mathbb{F}\}$ \\ 
+    $\implies$U + W = $\{(x,y,0) \in \mathbb{F}^3 : x,y \in \mathbb{F}\}$
+\end{center}    
+2. A sum of subspaces of $\mathbb{F}^4$ 
+\begin{center}
+    U = $\{(x,x,y,y) \in \mathbb{F}^4: x,y \in \mathbb{F}\}$ and V = $\{(x,x,x,y) \in \mathbb{F}^4 : x,y \in \mathbb{F}\}$ 
+\end{center}
+You cannot directly say that 
+\begin{center}
+    U + W = $\{(2x,2x,x+y,2y):\mathbb{F}^4 : x,y \in \mathbb{F}\}$        ...(1)
+\end{center}
+Axler points out that 
+\begin{center}
+    An element of U is (a,a,b,b) \\
+    An element of W is (c,c,c,d) \\
+    $\therefore$ An element of U+W is ((a+c),(a+c),(b+c),(b+d)) \\
+    $\therefore$ U+W $\subseteq$ $\{(x,x,y,z)\in \mathbb{F}^4: x,y,z \in \mathbb{F}\}$
+\end{center}
+To prove inclusion in the other direction, $x,y,z \in \mathbb{F}$ 
+\begin{center}
+    (x,x,y,z) = (x,x,y,y) + (0,0,0,(z-y))
+\end{center}
+The second term $\in$ Subspace W 
+\begin{center}
+    $\therefore$ U + W = $\{(x,x,y,z) \in \mathbb{F}^4 : x,y,z \in \mathbb{F}\}$
+\end{center}
+Extremely important to know that when you go fast, you get (1), WHICH IS WRONG. \\
+Go with set equality by double inclusion. \\
+\\
+\textbf{Claim:} Supposed $V_1,...V_m$ are the subspaces of V. Then, P.T. $V_1+...+V_m$ is the smallest subspace containing $V_1,...V_m$. \\
+\textbf{Note:} This proof will be slightly informal to help understanding. \\
+\begin{center}
+    \tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords]
+
+\draw[->] (0,0,0)--(3,0,0) node[right] {x};
+\draw[->] (0,0,0)--(0,3,0) node[left] {y};
+\draw[->] (0,0,0)--(0,0,1) node[above] {z};
+
+\filldraw[blue!15,opacity=0.7]
+(0,0,0)--(0,2.5,0)--(2.5,2.5,0)--(2.5,0,0)--cycle;
+\node[blue] at (1.2,1.2,0) {$V_1+V_2$};
+
+\draw[red,thick]
+(0,0,0)--(2.5,0,0);
+\node[red] at (2,0,0.3) {$V_1$};
+
+\draw[green,thick]
+(0,0,0)--(0,2.5,0);
+\node[green] at (0,2,0.3) {$V_2$};
+
+\end{tikzpicture}
+\end{center}
+We will just be operating with $V_1,V_2$ and $V_1+V_2$ where V = $\mathbb{R}^3$ \\
+First of all, we can comfortable say $V_1,V_2$ and $V_1+V_2$ are subspaces of V (Additive identity,closed addition and scalar multiplication)\\
+Secondly, $V_1$ and $V_2$ are contained in $V_1+V_2$ (You can prove this algebraically also). \\
+Now, conversely, every subspace of V containing $V_1,V_2$ must contain $V_1+V_2$ (The blue plane). \\
+No matter what subspace you take, the smallest one containing $V_1,V_2$ must be $V_1+V_2$. \\
+Think about it. Any other subspace I take would contain $V_1+V_2$ naturally. The largest subspace of V I can take is V itself. The smallest subspace of V containing $V_1,V_2$ must be $V_1+V_2$. 
+\subsection{Direct Sums}
+\textbf{Definition:}
+\begin{center}
+    Suppose $V_1,...V_m$ are subspaces of V
+    \begin{itemize}
+        \item The sum $V_1+...+V_m$ is called a direct sum if each element of $V_1+...+V_m$ can be written in only one way as a sum $v_1,...v_m$, where each $v_k \in V_k$.
+        \item If $V_1+...+V_m$ is a direct sum, then $V_1\oplus...\oplus V_m$ denotes $V_1+...+V_m$ with $\oplus$ saying that this is a direct sum.
+    \end{itemize}
+\end{center}
+\textbf{Logic:} \\
+Why do we need this? The reason is uniqueness. \\
+Without uniqueness, 
+\begin{center}
+    Suppose V = U + W \\
+    $\implies$ v = u + w, where $v \in V$, $u \in U$, $w \in W$ 
+\end{center}
+What can also happen is 
+\begin{center}
+    v = u + w = u' + w'
+\end{center}
+For example, 
+\begin{center}
+    (1,2) = (1,0) + (0,2) = (10,5) + (-9,-3) = ...
+\end{center}
+With uniqueness, 
+\begin{center}
+    i.e. when V = U $\oplus$ W \\
+    only v = u + w is possible 
+\end{center}
+This is what the first point is about. 
+\subsection{Examples of Direct Sums}
+1. U = $\{(x,y,0)\in \mathbb{F}^3: x,y \in \mathbb{F}\}$ and W = $\{(0,0,z) \in \mathbb{F}^3: z \in \mathbb{F}\}$ \\
+Clearly, $\mathbb{F}^3 = U \oplus W$ \\
+2. Suppose $V_k$ is a subspace of $\mathbb{F}^n$ such that the only non-zero value is the kth element of the list. \\
+\begin{center}
+    i.e. $V_2$ = (0,y,0,0,...,0) \\
+    $\therefore \mathbb{F}^n = V_1 \oplus V_2 \oplus V_3 \oplus ... \oplus V_n$ 
+\end{center}
+\subsection{A non-example of Direct Sums}
+1. Suppose
+\begin{center}
+    $V_1$ = $\{(x,y,0)\in \mathbb{F}^3: x,y \in \mathbb{F}\}$ \\
+    $V_2$ = $\{(0,0,z)\in \mathbb{F}^3: z \in \mathbb{F}\}$ \\
+    $V_3$ = $\{(0,y,y)\in \mathbb{F}^3: y \in \mathbb{F}\}$
+\end{center}
+Already, we can see that $\mathbb{F}^3 = V_1 \oplus V_2$ \\
+$V_3$ only add a possibility of non-uniqueness.
+\begin{center}
+    (0,0,0) = (0,1,0) + (0,0,1) + (0,-1,-1)
+            = (0,0,0) + (0,0,0) + (0,0,0)
+\end{center}
+It gives a way to modify $V_1 + V_2$ which allows the non-uniqueness due to the overlap. \\
+\\
+\textbf{Claim:} Suppose $V_1,...V_m$ are subspaces of V. P.T. $V_1+...+V_m$ is a direct sum $\iff$ the only way to write 0 as a sum $V_1+...+V_m$ where each $v_k \in V_k$ is by taking $v_k$ = 0 \\
+\textbf{Proof:} Left to right is fairly obvious. 
+\begin{center}
+    In order for $V_1+...+V_m$ to be a direct sum, there must only be one way (trivial) to write 0 as $V_1+...+V_m$ \\
+\end{center}
+Right to left: \\
+Let v $\in V$ such that 
+\begin{center}
+    v = $v_1+...+v_m$   ...(1) \\
+    where $v_1 \in V_1, v_2 \in V_2$ ...
+\end{center}
+Assume that, for $u_1 \in V_1$, $u_2 \in V_2$, ...
+\begin{center}
+    v = $u_1+...+u_m$
+\end{center}
+Subtracting (1) and (2), \\
+\begin{center}
+    0 = $(v_1-u_1) + (v_2-u_2)+...(v_m-u_m)$
+\end{center}
+The only way to do this is trivially i.e. 
+\begin{center}
+    $v_k - u_k = 0$ for k =1,2,3,...
+    $\therefore v_k = u_k$ \\
+    Proved.
+\end{center}
+\textbf{Remark/Reason:} Subtraction is actually a common way to generate such proofs. Simply put, we do it here to get the 0 and get the condition of direct sums. Simple operation, and easy to miss also. \\
+\\
+\textbf{Claim:} Suppose U and W are subspaces of V.\\
+Then, P.T. U + W is a direct sum $\iff$ $U \cap W = \{0\}$ \\
+\textbf{Proof:} Left to right: \\
+Assume that U + W is a direct sum. Let v $\in U \implies -v \in W$
+\begin{center}
+    v + (-v) = 0 \\
+    ($\because v \in U \cap W \implies v \in U \implies v \in W \implies -v \in W$) \\
+    $\implies$ u + w = 0 \\
+    Proved.
+\end{center}
+Right to left: 
+\begin{center}
+    Assume that $U \cap W = \{0\}$ \\
+    0 = u + w $\forall u \in U, w \in W$ \\
+    $\implies$ u = -w \\
+    $\implies$ -u = w $\in W$
+    $\implies$  u $\in W \cap U$ \\
+    $\therefore$ u = 0 = w \\
+    Proved.
+\end{center}
+\textbf{Note:} Read this properly. It is a good proof and also teaches you about iff proofs. 
+\subsection{A very interesting point by Axler}
+\begin{center}
+    Sums of subspaces are analogous to unions of subsets. Direct sums are analogous to disjoint unions of subsets. 
+\end{center}
+Also, when dealing with more than two subspaces, we cannot use the same logic as we did earlier. It is slightly different (You will see this later).
+
+
 
 \end{document}
